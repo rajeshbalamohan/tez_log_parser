@@ -18,12 +18,12 @@ export HADOOP_CLASSPATH=$TEZ_CONF_DIR:$TEZ_HOME/*:$TEZ_HOME/lib/*:$HADOOP_CLASSP
 
 Running pig with tez:
 ====================
-1. Install pig
+1. Install pig.  Clone this project in a directory.
 
 2. Populate param.txt.  Example param.txt is located in ./src/main/resources/pig/params.txt
 
 3. Run 
-      "PIG_CLASSPATH=$HADOOP_CLASSPATH:$PIG_CLASSPATH ./pig -x tez -m param.txt -f getMachineDetails.pig".  This will parse the machines on which the job ran, and get distinct machine names.
+      "PIG_CLASSPATH=$HADOOP_CLASSPATH:$PIG_CLASSPATH ./pig -x tez -m param.txt -f GetMachineDetails.pig".  This will parse the machines on which the job ran, and get distinct machine names.
 
 4. Replace DISTINCT_MACHINES and MACHINE_MAPPING_FILE_IN_HDFS in the following commands with the values from param.txt.  This step will get the machine mapping needed for gnu plotting (basically it generates a sequence number for every machine used in the job)
       hadoop dfs -cat <DISTINCT_MACHINES>/* | awk '{print NR","$0}' > machine_mapping.csv
