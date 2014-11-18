@@ -15,6 +15,7 @@ Running pig with tez:
 1. Install pig
 2. Populate param.txt
 3. "PIG_CLASSPATH=$HADOOP_CLASSPATH:$PIG_CLASSPATH ./pig -x tez -m param.txt -f parse.pig"
+Example param.txt is located in https://github.com/rajeshbalamohan/tez_log_parser/blob/master/src/main/resources/pig/params.txt
 
 Plot graph:
 ==========
