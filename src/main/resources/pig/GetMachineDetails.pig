@@ -1,6 +1,6 @@
 -- Run this script to get the set of machines involved in the application log (i.e the job log you are trying to parse)
 -- Running this script is a pre-requirement before running main script
--- Run the pig script "PIG_CLASSPATH=$HADOOP_CLASSPATH:$PIG_CLASSPATH ./pig -x tez -m param.txt -f getDistinctMachines.pig"
+-- Run the pig script "PIG_CLASSPATH=$HADOOP_CLASSPATH:$PIG_CLASSPATH ./pig -x tez -m param.txt -f GetDistinctMachines.pig"
 
 -- Using TFileStorage itself, so that we dont need to copy the logs
 set pig.splitCombination false;
