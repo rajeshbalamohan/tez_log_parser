@@ -13,7 +13,7 @@ Build/Install:
 Running pig with tez:
 ====================
 1. Install pig
-2. Populate param.txt.  Example param.txt is located in https://github.com/rajeshbalamohan/tez_log_parser/blob/master/src/main/resources/pig/params.txt
+2. Populate param.txt.  Example param.txt is located in ./src/main/resources/pig/params.txt
 3. Run 
       "PIG_CLASSPATH=$HADOOP_CLASSPATH:$PIG_CLASSPATH ./pig -x tez -m param.txt -f getMachineDetails.pig".  This will parse the machines on which the job ran, and get distinct machine names.
 
