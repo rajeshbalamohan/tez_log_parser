@@ -9,6 +9,12 @@ Build/Install:
 ==============
 1. mvn clean package
 
+Environment Settings in Client:
+==============================
+export TEZ_HOME=/grid/4/home/rajesh/tez-autobuild/dist/tez
+export TEZ_CONF_DIR=$TEZ_HOME/conf
+export HADOOP_CLASSPATH=$TEZ_CONF_DIR:$TEZ_HOME/*:$TEZ_HOME/lib/*:$HADOOP_CLASSPATH
+
 
 Running pig with tez:
 ====================
