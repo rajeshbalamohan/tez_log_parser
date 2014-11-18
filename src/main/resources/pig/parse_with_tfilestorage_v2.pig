@@ -1,4 +1,4 @@
--- Steps.  Upload mapping.csv to HDFS location
+-- Ensure that you have read README.txt.  Ensure you have copied the machine_mapping.csv to HDFS.
 -- Run the pig script "PIG_CLASSPATH=$HADOOP_CLASSPATH:$PIG_CLASSPATH ./pig -x tez -m param.txt -f parse.pig"
 -- Download "END_TO_END_TIMINGS_FOR_PLOTTING" from HDFS
 -- Plot the graph
@@ -13,13 +13,6 @@ register '/grid/4/home/rajesh/tez-autobuild/pig_tez_tfile_parser/target/udf-1.0-
 register 'udf.groovy' using org.apache.pig.scripting.groovy.GroovyScriptEngine as udf;
 
 define quantile datafu.pig.stats.Quantile('0.0','0.10','0.20','0.30', '0.40', '0.50','0.60', '0.70','0.80', '0.90','1.0');
-
--- Read through the logs and find out distinct machines in the cluster (machines which ran the job)
-DEFINE getDistinctMachines(raw) RETURNS void {
-	machines = FOREACH raw GENERATE udf.getMachineName(machine);
-	distinctMachines = DISTINCT machines;
-	STORE distinctMachines INTO '$DISTINCT_MACHINES' USING PigStorage(',');;
-}
 
 -- Analyze fetcher logs
 DEFINE parseFetcherData(raw) RETURNS void {
@@ -94,9 +87,6 @@ rmf $END_TO_END_TIMINGS
 rmf $END_TO_END_TIMINGS_FOR_PLOTTING
 rawLogs = load '$INPUT_LOGS' using org.apache.tez.tools.TFileLoader() as (machine:chararray, key:chararray, line:chararray);
 raw = FOREACH rawLogs GENERATE udf.getMachineName(machine), key, line;
-
-getDistinctMachines(raw);
-exec;
 
 parseFetcherData(raw);
 exec;

@@ -1,14 +1,30 @@
-INPUT_LOGS=/app-logs/rajesh/logs/application_1415079080661_0429/*
-MACHINE_MAPPING_FILE_IN_HDFS=/user/rajesh/pig/data/mapping.csv
-DISTINCT_MACHINES=/user/rajesh/pig/data/distinct_machines.csv
+# Configure BASE_DIR
+# Configure INPUT_LOGS
+# Results would be stored in $BASE_DIR/results in HDFS
+# Results for GNU plots would be stored in $BASE_DIR/results/end_to_end_result_for_plotting.csv
 
-BASE_DIR=/user/rajesh/pig/test1/
+#Base directory for storing results
+BASE_DIR=/user/rajesh/pig/parse_data/
+
+#Details on where the application log is located in HDFS
+INPUT_LOGS=/app-logs/rajesh/logs/application_1409012059361_0539/*
+
+#Location to store the number of distinct machines in the cluster
+DISTINCT_MACHINES=$BASE_DIR/data/distinct_machines.csv
+
+#Location where machine is mapped to sequence numbers for plotting (e.g (1,machine1), (2, machine2) etc)
+#To get this, first run
+MACHINE_MAPPING_FILE_IN_HDFS=$BASE_DIR/data/machine_mapping.csv
+
+
+#Dir Location for storing intermediate data for the jobs
 INTERMEDIATE_DATA_DIR=$BASE_DIR/data
-RESULTS_DIR=$BASE_DIR/results
-
 SRC_TO_ATTEMPT_INFO=$INTERMEDIATE_DATA_DIR/srcToAttempt.csv
 ATTEMPT_INFO=$INTERMEDIATE_DATA_DIR/rate.csv
 
+#Results directory
+RESULTS_DIR=$BASE_DIR/results
 END_TO_END_TIMINGS=$RESULTS_DIR/end_to_end_result.csv
+#Data for gnu plots
 END_TO_END_TIMINGS_FOR_PLOTTING=$RESULTS_DIR/end_to_end_result_for_plotting.csv
 ATTEMPT_TIMINGS=$RESULTS_DIR/attempt_timings.csv

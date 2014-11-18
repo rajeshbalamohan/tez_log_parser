@@ -13,9 +13,16 @@ Build/Install:
 Running pig with tez:
 ====================
 1. Install pig
-2. Populate param.txt
-3. "PIG_CLASSPATH=$HADOOP_CLASSPATH:$PIG_CLASSPATH ./pig -x tez -m param.txt -f parse.pig"
-Example param.txt is located in https://github.com/rajeshbalamohan/tez_log_parser/blob/master/src/main/resources/pig/params.txt
+2. Populate param.txt.  Example param.txt is located in https://github.com/rajeshbalamohan/tez_log_parser/blob/master/src/main/resources/pig/params.txt
+3. Run 
+      "PIG_CLASSPATH=$HADOOP_CLASSPATH:$PIG_CLASSPATH ./pig -x tez -m param.txt -f getMachineDetails.pig".  This will parse the machines on which the job ran, and get distinct machine names.
+
+4. Replace DISTINCT_MACHINES and MACHINE_MAPPING_FILE_IN_HDFS in the following commands with the values from param.txt.  This step will get the machine mapping needed for gnu plotting (basically it generates a sequence number for every machine used in the job)
+      hadoop dfs -cat <DISTINCT_MACHINES>/* | awk '{print NR","$0}' > machine_mapping.csv
+      hadoop dfs -put machine_mapping.csv <MACHINE_MAPPING_FILE_IN_HDFS>
+
+5. Run the main pig script.  
+     "PIG_CLASSPATH=$HADOOP_CLASSPATH:$PIG_CLASSPATH ./pig -x tez -m param.txt -f parse.pig"
 
 Plot graph:
 ==========
@@ -34,6 +41,6 @@ set datafile separator ','
 set view 55,32,1,1
 set dgrid3d 500,500 qnorm 2
 set contour base
-splot '/Users/rbalamohan/Downloads/end_to_end_result_for_plotting.csv' using 1:5:6 with l
+splot '/Users/root/Downloads/end_to_end_result_for_plotting.csv' using 1:5:6 with l
 
 
